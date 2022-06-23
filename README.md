@@ -14,3 +14,6 @@ Or you can just run it
 ```bash
 python main.py
 ```
+
+## Credits
+me
