@@ -12,17 +12,17 @@ class EnableChromeDevTools():
         self.name = "Discord.exe"
         self.dir = "discord"
 
-    def readSettings(self):
+    def getSettings(self):
         with open(join(self.appdata, self.dir, self.config), "r") as f:
             return load(f)
 
     def enableDevTools(self):
-        if self.key in self.readSettings():
+        if self.key in self.getSettings():
             print("Chrome DevTools already enabled!")
             sleep(2)
             exit()
         else:
-            dict = self.readSettings()
+            dict = self.getSettings()
             dict[self.key] = True
 
             try:
