@@ -1,4 +1,4 @@
-# Discord Chrome DevTools Enabler [![GitHub license](https://img.shields.io/github/license/Pooh-Shiesty/DiscordChromeDevToolsEnabler?style=flat-square)](https://github.com/Pooh-Shiesty/DiscordChromeDevToolsEnabler/blob/main/LICENSE.MD)
+# Discord Chrome DevTools Enabler [![GitHub license](https://img.shields.io/github/license/Pooh-Shiesty/DiscordChromeDevToolsEnabler?style=flat-square)](https://github.com/Pooh-Shiesty/DiscordChromeDevToolsEnabler/blob/main/LICENSE)
 
 > Tool to enable Chrome DevTools on Discord's Desktop app
 
