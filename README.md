@@ -29,4 +29,4 @@ It has been purely built with Python itself, no extra libraries has been used.
 
 ## Licensing
 
-This project is licensed under the MIT license, more information can be found [here](https://github.com/Pooh-Shiesty/DiscordChromeDevToolsEnabler/blob/main/LICENSE.MD)
+This project is licensed under the MIT license, more information can be found [here](https://github.com/Pooh-Shiesty/DiscordChromeDevToolsEnabler/blob/main/LICENSE)
