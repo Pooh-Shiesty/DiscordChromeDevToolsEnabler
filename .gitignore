@@ -1,3 +1,7 @@
 *.pyc
 __pycache__
 .git
+env
+main.build
+main.dist
+*.exe

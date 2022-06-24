@@ -30,7 +30,7 @@ class EnableChromeDevTools():
                     dump(dict, f, indent=2)
 
                 system("taskkill /im Discord.exe /F")
-                print("Chrome DevTools enabled!\nPlease re-launch Discord!\nCTRL + SHIFT + I to enable Chrome DevTools :)\n")
+                print("Chrome DevTools enabled!\nPlease re-launch Discord!\nCTRL + SHIFT + I to enable Chrome DevTools\n")
                 sleep(5)
                 exit()
             except Exception as e:
