@@ -7,7 +7,7 @@ This tool takes use of `settings.json` and adds a JSON key to allow Chrome DevTo
 ## Installing / Getting started
 
 Prerequisites
-* [Python](https://python.org/) (tested on 3.10)
+* [Python](https://python.org/) (built with 3.10)
 * [Git](https://git-scm.com/)
 
 `Windows`
