@@ -23,7 +23,6 @@ class EnableChromeDevTools():
         self.config_path = join(self.appdata, self.app_dir, self.config_file)
         self.data = {
             "autoUpdate": None,
-            "version": "1.2"
         }
 
 
