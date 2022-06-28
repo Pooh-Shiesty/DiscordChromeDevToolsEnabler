@@ -5,3 +5,6 @@ env
 main.build
 main.dist
 *.exe
+*.7z
+*.zip
+.vscode
