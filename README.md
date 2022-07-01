@@ -1,31 +1,38 @@
 # Discord Chrome DevTools Enabler [![GitHub license](https://img.shields.io/github/license/Pooh-Shiesty/DiscordChromeDevToolsEnabler?style=flat-square)](https://github.com/Pooh-Shiesty/DiscordChromeDevToolsEnabler/blob/main/LICENSE)
 
-> Tool to enable Chrome DevTools on Discord's Desktop app
+> Tool to enable Chrome DevTools on the Discord Client
 
-This tool takes use of `settings.json` and adds a JSON key to allow Chrome DevTools to be used. It's also extremely lightweight as it doesn't use any pip packages, it only takes use of default Python libraries.
+This tool takes use of `settings.json` and adds a JSON key to allow Chrome DevTools to be used. It's very lightweight since it only uses colorama for visual appearance.
 
-## Installing / Getting started
+## Installing
+
+If you are on Windows you can get the latest version of DCDTE [here](https://github.com/Pooh-Shiesty/DiscordChromeDevToolsEnabler/releases/latest). If you are on a Linux or Unix-based system you can check out [Building](#building)
+
+## Building
 
 Prerequisites
 * [Python](https://python.org/) (built with 3.10)
-* [Git](https://git-scm.com/)
 
-`Windows`
-```shell
-python main.py
-```
+- Clone or download the repo
 
-`Linux`
-```shell
-python3 main.py
-```
+- It's highly recommended to create a virtual environment.  
+    
+    `Windows`
+    ```shell
+    python -m venv env
+    .\env\Scripts\activate
+    ```
 
-When you execute the code it will automatically terminate all Discord processes and add a JSON key to your `settings.json` file which allows Chrome DevTools to be used. It will print out that Chrome DevTools has been enabled, how to use it in Discord, and to re-launch Discord. And if you launch it again it will print out that you already have Chrome DevTools enabled.
+    `Linux`
+    ```shell
+    python3 -m venv env
+    source /env/Scripts/activate
+    ```
 
-## Developing
+- `pip install -r requirements.txt`
+- `python -m nuitka --standalone main.py`
+- Once the command has finished `main.dist` will contain a file named `main.exe`
 
-### Built with
-It has been purely built with Python itself, no extra libraries has been used.
 
 ## Licensing
 

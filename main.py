@@ -13,45 +13,46 @@ from colorama import init, Fore, Style
 init()
 
 class EnableChromeDevTools():
-    def __init__(self):
-        self.appdata = getenv("APPDATA")
-        self.localappdata = getenv("LOCALAPPDATA")
-        self.json_key = "DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING"
-        self.settings_file = "settings.json"
-        self.process_name = "Discord.exe"
-        self.discord_dir = "discord"
-        self.discord_exe = join(self.localappdata, "Discord", "app-1.0.9005", self.process_name)
-        self.app_dir = "DCDTE"
-        self.app_path = join(self.appdata, self.app_dir)
-        self.config_file = "config.json"
-        self.config_path = join(self.appdata, self.app_dir, self.config_file)
-        self.data = {
-            "relaunch": False,
-            "terminate": False,
-        }
-        self.r = Style.RESET_ALL
-        self.cyan = Fore.LIGHTCYAN_EX
-        self.red = Fore.LIGHTRED_EX
-        self.yellow = Fore.LIGHTYELLOW_EX
-        self.bright = Style.BRIGHT
-        self.green = Fore.LIGHTGREEN_EX
+
+    APPDATA = getenv("APPDATA")
+    LOCALAPPDATA = getenv("LOCALAPPDATA")
+    JSON_KEY = "DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING"
+    SETTINGS_FILE = "settings.json"
+    PROCESS_NAME = "Discord.exe"
+    DISCORD_DIR = "discord"
+    DISCORD_EXE = join(LOCALAPPDATA, "Discord", "app-1.0.9005", PROCESS_NAME)
+    APP_DIR = "DCDTE"
+    APP_PATH = join(APPDATA, APP_DIR)
+    CONFIG_FILE = "config.json"
+    CONFIG_PATH = join(APPDATA, APP_DIR, CONFIG_FILE)
+    CONFIG_DATA = {
+        "relaunch": False,
+    }
+
+    # colors
+    RESET = Style.RESET_ALL
+    CYAN = Fore.LIGHTCYAN_EX
+    RED = Fore.LIGHTRED_EX
+    YELLOW = Fore.LIGHTYELLOW_EX
+    BRIGHT = Style.BRIGHT
+    GREEN = Fore.LIGHTGREEN_EX
 
     def mainMenu(self):
         self.clearScreen()
-        choice = input(rf"""{self.r}{self.cyan}
+        choice = input(rf"""{self.RESET}{self.CYAN}
     ___  ___   ___  _____  __ 
    /   \/ __\ /   \/__   \/__\
   / /\ / /   / /\ /  / /\/_\  
  / /_// /___/ /_//  / / //__  
 /___,'\____/___,'   \/  \__/
-{self.r}
+{self.RESET}
 
-  {self.yellow}1.{self.r} {self.bright}Enable DevTools{self.r}
-  {self.yellow}2.{self.r} {self.bright}Disable DevTools{self.r}
-  {self.yellow}3.{self.r} {self.bright}Configure Settings{self.r}
-  {self.yellow}4.{self.r} {self.bright}Exit{self.r}
+  {self.YELLOW}1.{self.RESET} {self.BRIGHT}Enable DevTools{self.RESET}
+  {self.YELLOW}2.{self.RESET} {self.BRIGHT}Disable DevTools{self.RESET}
+  {self.YELLOW}3.{self.RESET} {self.BRIGHT}Configure Settings{self.RESET}
+  {self.YELLOW}4.{self.RESET} {self.BRIGHT}Exit{self.RESET}
 
-  {self.red}Input:{self.r} """)
+  {self.RED}Input:{self.GREEN} """)
         self.clearScreen()
 
         match choice:
@@ -64,7 +65,7 @@ class EnableChromeDevTools():
             case "4":
                 exit()
             case other:
-                print(f"{self.r}{self.red}{self.bright}Invalid option!{self.r}")
+                print(f"{self.RESET}{self.RED}{self.BRIGHT}Invalid option!{self.RESET}")
                 self.back(1)
 
 
@@ -79,10 +80,10 @@ class EnableChromeDevTools():
 
 
     def readConfig(self):
-        if not exists(self.config_path):
+        if not exists(self.CONFIG_PATH):
             self.createConfig()
         
-        with open(self.config_path, "r") as f:
+        with open(self.CONFIG_PATH, "r") as f:
             return load(f)
 
 
@@ -97,22 +98,20 @@ class EnableChromeDevTools():
     def changeSettings(self):
         dict = self.readConfig()
         relaunch = Fore.GREEN if (dict.get("relaunch")) is True else Fore.RED
-        terminate = Fore.GREEN if (dict.get("terminate")) is True else Fore.RED
         self.clearScreen()
-        choice = input(rf"""{self.r}{self.cyan}
+        choice = input(rf"""{self.RESET}{self.CYAN}
  __      _   _   _                 
 / _\ ___| |_| |_(_)_ __   __ _ ___ 
 \ \ / _ \ __| __| | '_ \ / _` / __|
 _\ \  __/ |_| |_| | | | | (_| \__ \
 \__/\___|\__|\__|_|_| |_|\__, |___/
                          |___/
-{self.r}
+{self.RESET}
 
-    {self.yellow}1.{self.r} {relaunch}{self.bright}Automatically relaunch Discord{self.r}
-    {self.yellow}2.{self.r} {terminate}{self.bright}Automatically terminate Discord{self.r}
-    {self.yellow}3.{self.r} {self.bright}Back{self.r}
+    {self.YELLOW}1.{self.RESET} {relaunch}{self.BRIGHT}Automatically relaunch Discord{self.RESET}
+    {self.YELLOW}2.{self.RESET} {self.BRIGHT}Back{self.RESET}
 
-    {self.red}Input:{self.r} """)
+    {self.RED}Input:{self.RESET} """)
         self.clearScreen()
 
         match choice:
@@ -120,77 +119,75 @@ _\ \  __/ |_| |_| | | | | (_| \__ \
                 self.changeConfig("relaunch")
                 self.changeSettings()
             case "2":
-                self.changeConfig("terminate")
-                self.changeSettings()
-            case "3":
                 self.back(0)
+            case other:
+                print(f"{self.RESET}{self.RED}{self.BRIGHT}Invalid option!{self.RESET}")
+                self.back(1)
 
     def createConfig(self):
-        makedirs(self.app_path)
-        with open(self.config_path, "w") as f:
-                dump(self.data, f, indent=4)
+        makedirs(self.APP_PATH)
+        with open(self.CONFIG_PATH, "w") as f:
+                dump(self.CONFIG_DATA, f, indent=4)
 
 
     def writeToConfig(self, data: dict):
-        with open(self.config_path, "w") as f:
+        with open(self.CONFIG_PATH, "w") as f:
             dump(data, f, indent=4)
 
 
     def getSettings(self):
-        with open(join(self.appdata, self.discord_dir, self.settings_file), "r") as f:
+        with open(join(self.APPDATA, self.DISCORD_DIR, self.SETTINGS_FILE), "r") as f:
             return load(f)
 
 
     def disableDevTools(self):
         config = self.readConfig()
         dict = self.getSettings()
-        if (dict.get(self.json_key) is False):
-            print(f"{self.r}{self.yellow}{self.bright}Already disabled!{self.r}")
+        if (dict.get(self.JSON_KEY) is False):
+            print(f"{self.RESET}{self.YELLOW}{self.BRIGHT}Already disabled!{self.RESET}")
             self.back(1)
         else:
             try:
-                dict[self.json_key] = False
-                with open(join(self.appdata, self.discord_dir, self.settings_file), "w") as f:
+                dict[self.JSON_KEY] = False
+                with open(join(self.APPDATA, self.DISCORD_DIR, self.SETTINGS_FILE), "w") as f:
                     dump(dict, f, indent=2)
                 
-                if (config.get("terminate")) is True:
-                    system(f"taskkill /im {self.process_name} /F")
                 if (config.get("relaunch")) is True:
                     try:
-                        system(f"taskkill /im {self.process_name} /F")
+                        system(f"taskkill /im {self.PROCESS_NAME} /F")
                     except:
                         pass
-                    system("start " + self.discord_exe)
-                print(f"{self.r}{self.green}{self.bright}Disabled Chrome DevTools!{self.r}")
+                    system("start " + self.DISCORD_EXE)
+
+                print(f"{self.RESET}{self.GREEN}{self.BRIGHT}Disabled Chrome DevTools!{self.RESET}")
                 self.back(2)
             except Exception as e:
-                print(self.r + e)
+                print(self.RESET + e)
 
 
     def enableDevTools(self):
         config = self.readConfig()
         dict = self.getSettings()
-        if (dict.get(self.json_key) is True):
-            print(f"{self.r}{self.yellow}{self.bright}Already enabled!{self.r}")
+        if (dict.get(self.JSON_KEY) is True):
+            print(f"{self.RESET}{self.YELLOW}{self.BRIGHT}Already enabled!{self.RESET}")
             self.back(1)
         else:
             try:
-                dict[self.json_key] = True
-                with open(join(self.appdata, self.discord_dir, self.settings_file), "w") as f:
+                dict[self.JSON_KEY] = True
+                with open(join(self.APPDATA, self.DISCORD_DIR, self.SETTINGS_FILE), "w") as f:
                     dump(dict, f, indent=2)
 
-                if (config.get("terminate")) is True:
-                    system(f"taskkill /im {self.process_name} /F")
                 if (config.get("relaunch")) is True:
                     try:
-                        system(f"taskkill /im {self.process_name} /F")
+                        system(f"taskkill /im {self.PROCESS_NAME} /F")
                     except:
                         pass
-                    system("start " + self.discord_exe)
-                print(f"{self.r}{self.green}{self.bright}Enabled Chrome DevTools!\n{self.r}{self.cyan}{self.bright}CTRL + SHIFT + I{self.r}")
+                    system("start " + self.DISCORD_EXE)
+
+                print(f"{self.RESET}{self.GREEN}{self.BRIGHT}Enabled Chrome DevTools!\n{self.RESET}{self.CYAN}{self.BRIGHT}CTRL + SHIFT + I{self.RESET}")
                 self.back(2)
             except Exception as e:
-                print(self.r + e)
+                print(self.RESET + e)
 
 
     def main(self):
